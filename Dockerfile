@@ -1,5 +1,5 @@
-# Use a lightweight JDK 17 runtime
-FROM openjdk:17-jdk-slim
+# Use a stable, official JDK 17 runtime from Temurin
+FROM eclipse-temurin:17-jdk
 
 # Set the working directory inside the container
 WORKDIR /app
