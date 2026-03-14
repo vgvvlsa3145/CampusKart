@@ -1,5 +1,6 @@
-# Maven build output
-target/
+# Maven build output (Ignore target, but allow the JAR)
+target/*
+!target/*.jar
 
 # Portable JDK and Maven (downloaded automatically by run.bat)
 jdk-17/
