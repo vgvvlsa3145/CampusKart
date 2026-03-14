@@ -1,0 +1,23 @@
+# Maven build output
+target/
+
+# Portable JDK and Maven (downloaded automatically by run.bat)
+jdk-17/
+jdk/
+maven/
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+compile.log
+
+# Temp download ZIPs
+*.zip

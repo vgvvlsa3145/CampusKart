@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CampusKart | Online Shopping</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Material Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-left">
+                <div class="logo" onclick="app.navigate('home')">
+                    <i>Campus</i>Kart
+                </div>
+                <div class="search-bar">
+                    <input type="text" id="searchInput" placeholder="Search for products, brands and more">
+                    <button class="search-btn"><span class="material-icons">search</span></button>
+                </div>
+            </div>
+            <div class="nav-right" id="navRight">
+                <!-- Dynamically populated by JS based on Auth state -->
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main id="app-content">
+        <!-- Views will be injected here -->
+    </main>
+
+    <!-- Modals -->
+    <!-- Login Modal -->
+    <div id="authModal" class="modal">
+        <div class="modal-content auth-dialog">
+            <div class="auth-left">
+                <h2>Login</h2>
+                <p>Get access to your Orders, Wishlist and Recommendations</p>
+                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png"
+                    alt="Login">
+            </div>
+            <div class="auth-right">
+                <button class="close-modal" onclick="ui.closeModal('authModal')">&times;</button>
+                <form id="loginForm" onsubmit="app.handleLogin(event)">
+                    <div class="form-group">
+                        <input type="text" id="loginUsername" required placeholder=" ">
+                        <label>Username</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="loginPassword" required placeholder=" ">
+                        <label>Password</label>
+                    </div>
+                    <p class="error-msg" id="loginError"></p>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
+                </form>
+                <div class="auth-switch">
+                    New to CampusKart? <a href="#" onclick="app.showRegister()">Create an account</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div id="registerModal" class="modal">
+        <div class="modal-content auth-dialog">
+            <div class="auth-left">
+                <h2>Looks like you're new here!</h2>
+                <p>Sign up with your details to get started</p>
+                <img src="https://static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/login_img_c4a81e.png"
+                    alt="Register">
+            </div>
+            <div class="auth-right">
+                <button class="close-modal" onclick="ui.closeModal('registerModal')">&times;</button>
+                <form id="registerForm" onsubmit="app.handleRegister(event)">
+                    <div class="form-group">
+                        <input type="text" id="regUsername" required placeholder=" ">
+                        <label>Choose Username</label>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" id="regPassword" required placeholder=" ">
+                        <label>Choose Password</label>
+                    </div>
+                    <p class="error-msg" id="regError"></p>
+                    <button type="submit" class="btn btn-primary" style="width:100%">Continue</button>
+                    <button type="button" class="btn btn-secondary mt-10" style="width:100%"
+                        onclick="app.showLogin()">Existing User? Log in</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notification Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Fake Payment Modal -->
+    <div id="paymentModal" class="modal">
+        <div class="modal-content payment-dialog">
+            <h2>Secure Payment <span class="material-icons"
+                    style="color:var(--success-color); vertical-align:middle;">verified_user</span></h2>
+            <div class="payment-amount">Total: ₹<span id="payAmount">0</span></div>
+
+            <div id="qrCodeContainer" class="qr-container">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=upi://pay?pa=campuskart@okicici&pn=CampusKart&am=amount"
+                    alt="UPI QR Code" class="qr-image">
+                <p class="mt-10 mb-20" style="color:var(--text-light); font-size:14px;">Scan with any UPI App (GPay,
+                    PhonePe, Paytm)</p>
+            </div>
+
+            <div class="payment-methods">
+                <div class="pay-method selected">UPI / QR SCAN</div>
+                <div class="pay-method">Cash On Delivery</div>
+                <div class="pay-method">Credit/Debit Card</div>
+            </div>
+
+            <div class="form-group mt-20 text-left">
+                <label
+                    style="position:static; font-size:14px; color:var(--text-light); margin-bottom:5px; display:block;">Delivery
+                    Address</label>
+                <textarea id="deliveryAddress" rows="3"
+                    style="width:100%; border:1px solid var(--border-color); padding:10px; border-radius:4px; font-family:inherit; resize:vertical;"
+                    placeholder="Enter your full campus delivery address..." required></textarea>
+            </div>
+
+            <div class="payment-loading" id="payLoading" style="display:none;">
+                <div class="spinner"></div>
+                <h3 class="mt-10" style="color: var(--primary-color);">Processing your payment securely...</h3>
+                <p class="small-text mt-10" style="color: var(--text-light);">Please do not refresh the page or press
+                    back button</p>
+            </div>
+
+            <div class="payment-success" id="paymentSuccess" style="display:none;">
+                <div class="success-checkmark">
+                    <div class="check-icon">
+                        <span class="icon-line line-tip"></span>
+                        <span class="icon-line line-long"></span>
+                        <div class="icon-circle"></div>
+                        <div class="icon-fix"></div>
+                    </div>
+                </div>
+                <h3 class="mt-10" style="color: var(--success-color);">Payment Successful!</h3>
+                <p class="mt-10 small-text">Order confirmed.</p>
+            </div>
+
+            <button class="btn btn-primary" id="btnPayNow" onclick="app.processPayment()">Simulate Successful
+                Payment</button>
+            <button class="btn btn-secondary mt-10" onclick="ui.closeModal('paymentModal')"
+                style="width: 100%;">Cancel</button>
+        </div>
+    </div>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
