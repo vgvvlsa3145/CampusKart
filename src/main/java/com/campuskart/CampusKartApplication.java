@@ -22,6 +22,12 @@ public class CampusKartApplication {
                 if (port == -1) port = 5432;
                 
                 String jdbcUrl = "jdbc:postgresql://" + uri.getHost() + ":" + port + uri.getPath();
+                if (!jdbcUrl.contains("?")) {
+                    jdbcUrl += "?sslmode=require";
+                } else if (!jdbcUrl.contains("sslmode=")) {
+                    jdbcUrl += "&sslmode=require";
+                }
+                
                 System.setProperty("spring.datasource.url", jdbcUrl);
                 
             } catch (Exception e) {
