@@ -29,6 +29,8 @@ public class CampusKartApplication {
                 }
                 
                 System.setProperty("spring.datasource.url", jdbcUrl);
+                System.setProperty("spring.datasource.driver-class-name", "org.postgresql.Driver");
+                System.setProperty("spring.jpa.database-platform", "org.hibernate.dialect.PostgreSQLDialect");
                 
             } catch (Exception e) {
                 // Fail-safe: if manual parsing fails, try simple prefixing

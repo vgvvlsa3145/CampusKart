@@ -15,14 +15,15 @@ public class Product {
     @Column(nullable = false, length = 500)
     private String name;
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String description;
 
     @Column(nullable = false)
     private Double price;
 
-    @Column(length = 1000)
+    @Column(length = 2000)
     private String imageUrl;
 
+    @Column(length = 200)
     private String category;
 }
