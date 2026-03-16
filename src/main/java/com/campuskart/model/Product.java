@@ -12,7 +12,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, length = 500)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String name;
 
     @Column(columnDefinition = "TEXT")
@@ -21,9 +21,9 @@ public class Product {
     @Column(nullable = false)
     private Double price;
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String imageUrl;
 
-    @Column(length = 200)
+    @Column(columnDefinition = "TEXT")
     private String category;
 }

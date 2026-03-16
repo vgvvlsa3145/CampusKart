@@ -28,7 +28,7 @@ public class Order {
     @Column(nullable = false)
     private String paymentStatus; // e.g., PAID
 
-    @Column(length = 2000)
+    @Column(columnDefinition = "TEXT")
     private String deliveryAddress;
 
     private LocalDateTime createdAt = LocalDateTime.now();
