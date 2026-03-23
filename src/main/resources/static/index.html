@@ -56,6 +56,7 @@
                     <div class="form-group">
                         <input type="password" id="loginPassword" required placeholder=" ">
                         <label>Password</label>
+                        <span class="material-icons toggle-password" onclick="ui.togglePassword('loginPassword', this)">visibility</span>
                     </div>
                     <p class="error-msg" id="loginError"></p>
                     <button type="submit" class="btn btn-primary" style="width:100%">Login</button>
@@ -86,6 +87,7 @@
                     <div class="form-group">
                         <input type="password" id="regPassword" required placeholder=" ">
                         <label>Choose Password</label>
+                        <span class="material-icons toggle-password" onclick="ui.togglePassword('regPassword', this)">visibility</span>
                     </div>
                     <p class="error-msg" id="regError"></p>
                     <button type="submit" class="btn btn-primary" style="width:100%">Continue</button>

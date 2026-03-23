@@ -715,3 +715,6 @@ main {
     84% { width: 55px; right: 0px; top: 35px; }
     100% { width: 47px; right: 8px; top: 38px; }
 }
+
+.form-group .toggle-password { position: absolute; right: 0; top: 10px; cursor: pointer; color: var(--text-light); user-select: none; font-size: 20px; transition: color 0.2s; } .form-group .toggle-password:hover { color: var(--primary-color); } .form-group input[type='password'] { padding-right: 30px; }
+

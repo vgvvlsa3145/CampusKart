@@ -52,6 +52,16 @@ const ui = {
     },
     renderView: (html) => {
         document.getElementById('app-content').innerHTML = html;
+    },
+    togglePassword: (id, icon) => {
+        const input = document.getElementById(id);
+        if (input.type === 'password') {
+            input.type = 'text';
+            icon.innerText = 'visibility_off';
+        } else {
+            input.type = 'password';
+            icon.innerText = 'visibility';
+        }
     }
 };
 
